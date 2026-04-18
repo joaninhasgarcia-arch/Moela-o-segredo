@@ -1,45 +1,64 @@
-
-let questions = [
-    {
-        question: "Como você se sente em relação ao vício dessa pessoa?",
-        options: ["Desespero, já tentei de tudo.", "Esperança, quero achar uma solução.", "Raiva, sinto que estou perdendo ela.", "Medo, não sei até onde isso pode ir."],
-        correct: 1
-    },
-    {
-        question: "Como você reage quando vê essa pessoa bebendo?",
-        options: ["Sinto um vazio, sem saber o que fazer.", "Fico triste, vejo ela se afastando.", "Fico com raiva, ela está se destruindo.", "Tenho medo, sei que vai piorar."],
-        correct: 2
-    }
+let currentQuestion = 0;
+const questions = [
+  {
+    title: "Como você se sente em relação ao vício dessa pessoa?",
+    answers: [
+      "Desespero, já tentei de tudo.",
+      "Esperança, quero achar uma solução.",
+      "Raiva, sinto que estou perdendo ela.",
+      "Medo, não sei até onde isso pode ir."
+    ]
+  },
+  {
+    title: "Você já tentou conversar sobre o vício com essa pessoa?",
+    answers: [
+      "A pessoa evitou a conversa.",
+      "A pessoa admitiu, mas não quer mudar.",
+      "A pessoa ficou agressiva.",
+      "Já tentamos de tudo, mas não conseguimos mais nada."
+    ]
+  },
+  {
+    title: "Quais efeitos o vício está causando na vida dessa pessoa?",
+    answers: [
+      "Afeta o relacionamento familiar.",
+      "Prejudica o trabalho/estudos.",
+      "Causa problemas de saúde.",
+      "Já passou por internações graves.",
+      "Outros (Especifique)"
+    ]
+  }
 ];
 
-let currentQuestionIndex = 0;
-
 function displayQuestion() {
-    const questionContainer = document.getElementById('question-container');
-    const responseContainer = document.getElementById('response-container');
-
-    const question = questions[currentQuestionIndex];
-    questionContainer.innerHTML = `<h2>${question.question}</h2>`;
-
-    responseContainer.innerHTML = '';
-    question.options.forEach((option, index) => {
-        const button = document.createElement('button');
-        button.innerText = option;
-        button.onclick = function() {
-            alert(index === question.correct ? 'Resposta correta!' : 'Resposta errada!');
-            nextQuestion();
-        };
-        responseContainer.appendChild(button);
-    });
+  const question = questions[currentQuestion];
+  document.getElementById("question-title").textContent = question.title;
+  const answerButtons = document.getElementById("answer-options");
+  answerButtons.innerHTML = "";
+  question.answers.forEach((answer, index) => {
+    const button = document.createElement("button");
+    button.textContent = answer;
+    button.classList.add("answer-button");
+    button.onclick = nextQuestion;
+    answerButtons.appendChild(button);
+  });
 }
 
 function nextQuestion() {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-        displayQuestion();
-    } else {
-        document.getElementById('quiz-container').innerHTML = '<h2>Você completou o quiz!</h2>';
-    }
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    displayQuestion();
+    updateProgressBar();
+  } else {
+    document.getElementById("question-title").textContent = "Obrigado por responder!";
+    document.getElementById("answer-options").style.display = "none";
+    document.getElementById("next-button").style.display = "none";
+  }
 }
 
-window.onload = displayQuestion;
+function updateProgressBar() {
+  const progress = (currentQuestion / questions.length) * 100;
+  document.getElementById("progress-bar").style.width = progress + "%";
+}
+
+displayQuestion();
