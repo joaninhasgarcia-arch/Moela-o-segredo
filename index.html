@@ -1,19 +1,38 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Segredo da Moela</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Segredo da Moela</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="quiz-container">
-        <div id="question-container"></div>
-        <div id="response-container"></div>
-        <button id="next-button" onclick="nextQuestion()">Próxima Pergunta</button>
-    </div>
+  <div class="container">
+    <header>
+      <h1>Segredo da Moela</h1>
+    </header>
+    <main>
+      <div class="progress-bar">
+        <div class="progress" id="progress-bar"></div>
+      </div>
 
-    <script src="script.js"></script>
+      <div class="question-container">
+        <h2 id="question-title">Como você se sente em relação ao vício dessa pessoa?</h2>
+        <div class="answers" id="answer-options">
+          <button class="answer-button" onclick="nextQuestion()">Desespero, já tentei de tudo.</button>
+          <button class="answer-button" onclick="nextQuestion()">Esperança, quero achar uma solução.</button>
+          <button class="answer-button" onclick="nextQuestion()">Raiva, sinto que estou perdendo ela.</button>
+          <button class="answer-button" onclick="nextQuestion()">Medo, não sei até onde isso pode ir.</button>
+        </div>
+      </div>
+
+      <div class="footer">
+        <button class="next-button" id="next-button" onclick="nextQuestion()">Próxima Pergunta</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
