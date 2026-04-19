@@ -1,1 +1,0 @@
-// JavaScript code here for quiz functionality
